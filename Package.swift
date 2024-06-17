@@ -31,8 +31,8 @@ let package = Package(
             ],
             path: "VaporApp/Sources",
             resources: [
-                .copy("VaporApp/Public/"),
-                .copy("VaporApp/Resources/")
+                .copy("../Public/"),
+                .copy("../Resources/")
             ],
             swiftSettings: swiftSettings
         ),
