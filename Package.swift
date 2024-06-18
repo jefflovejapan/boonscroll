@@ -1,5 +1,4 @@
 // swift-tools-version:5.10
-import Foundation
 import PackageDescription
 
 let package = Package(
@@ -30,11 +29,11 @@ let package = Package(
         .product(name: "NIOPosix", package: "swift-nio"),
         .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
       ],
-      path: "VaporApp/Sources",
-      resources: [
-        .copy("../Public/"),
-        .copy("../Resources/"),
-      ],
+      path: "App/Sources/",
+    //   resources: [
+    //     .copy("./Public/"),
+    //     .copy("./Resources/"),
+    //   ],
       swiftSettings: swiftSettings
     ),
     .testTarget(
@@ -43,7 +42,7 @@ let package = Package(
         .target(name: "App"),
         .product(name: "XCTVapor", package: "vapor"),
       ],
-      path: "VaporApp/Tests/AppTests",
+      path: "Tests/AppTests",
       swiftSettings: swiftSettings
     ),
   ]
@@ -53,6 +52,5 @@ var swiftSettings: [SwiftSetting] {
   [
     .enableUpcomingFeature("DisableOutwardActorInference"),
     .enableExperimentalFeature("StrictConcurrency"),
-    .define("WORKING_DIRECTORY", FileManager.default.currentDirectoryPath + "/VaporApp"),
   ]
 }
