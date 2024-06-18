@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build && cp -r build/static/ ../VaporApp/Public/Static/Bundle && cp build/index.html ../VaporApp/Public/Templates/Bundle/",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build && cp -r build/static/ ../Public/Static/Bundle && cp build/index.html ../Public/Templates/Bundle/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
