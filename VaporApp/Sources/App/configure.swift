@@ -32,6 +32,13 @@ public func configure(_ app: Application) async throws {
     throw ConfigurationError.unknownDatabaseType(databaseType)
   }
 
+  /*
+  file middleware -> index.html call some endpoint
+
+  Put the JS and HTML etc. on a CDN and have the Swift code on a completely separate server
+  */
+
+
   app.migrations.add(CreateTodo())
   // register routes
   try routes(app)
