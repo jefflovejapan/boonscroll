@@ -13,10 +13,11 @@ struct LinkInput: Content {
 
 struct LinkController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        let todos = routes.grouped("links")
+        let links = routes.grouped("links")
 
-        todos.get(use: self.index)
-        todos.post(use: self.create)
+        links.get(use: self.index)
+        links.post(use: self.create)
+        links.delete(":link_id", use: self.delete)
     }
 
     @Sendable
@@ -34,7 +35,10 @@ struct LinkController: RouteCollection {
 
     @Sendable
     func delete(req: Request) async throws -> HTTPStatus {
-        guard let link = try await Link.find(req.parameters.get("todoID"), on: req.db) else {
+        guard let linkID = req.parameters.get("link_id", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
+        guard let link = try await Link.find(linkID, on: req.db) else {
             throw Abort(.notFound)
         }
 

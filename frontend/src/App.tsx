@@ -14,10 +14,7 @@ function App() {
     alert('Button clicked!');
   };
 
-  useEffect(() => {
-    onAppear();
-  })
-  const onAppear = async () => {
+  const loadLinks = async () => {
     try {
       const response = await fetch('http://127.0.0.1:8080/links', {
         method: 'GET',
@@ -31,6 +28,11 @@ function App() {
       console.error('Error fetching links:', error);
     }
   };
+
+  useEffect(() => {
+    loadLinks();
+  }, [])
+
   const submitLinkClick = async () => {
     if (inputValue) {
       try {
@@ -55,6 +57,20 @@ function App() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
+  const deleteLinkClicked = async (id: string) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8080/links/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(`Deleting link with id ${id} succeeded`);
+      await loadLinks();
+    } catch (error) {
+      console.error('Network call error:', error);
+    }
+  }
 
   type MenuItem = Required<MenuProps>['items'][number];
   const data: String[] = [
@@ -81,31 +97,13 @@ function App() {
             bordered
             dataSource={links}
             renderItem={(link) => (
-              <List.Item>
-                {link.title}: <a href ={link.url}>link</a>
+              <List.Item key={link.id} actions={[<Button danger={true} type="primary" onClick={(_: React.MouseEvent<HTMLElement, MouseEvent>) => deleteLinkClicked(link.id)}></Button>]}>
+                {link.title}: <a href={link.url}>link</a>
               </List.Item>
             )}
           />
-
         </Content>
       </Layout>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <div>
-          <Button type="primary" onClick={handleButtonClick}>Yo God!</Button>
-        </div>
-      </header>
     </div>
   );
 }
