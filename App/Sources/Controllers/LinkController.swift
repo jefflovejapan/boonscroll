@@ -5,6 +5,10 @@ struct LinkInput: Content {
     var url: URL
     var title: String
     var thumbnailURL: URL?
+
+    func toModel() -> Link {
+        return Link.init(id: nil, url: self.url, title: self.title, thumbnailURL: nil, notes: nil)
+    }
 }
 
 struct LinkController: RouteCollection {
@@ -22,7 +26,7 @@ struct LinkController: RouteCollection {
 
     @Sendable
     func create(req: Request) async throws -> LinkDTO {
-        let link = try req.content.decode(LinkDTO.self).toModel()
+        let link = try req.content.decode(LinkInput.self).toModel()
 
         try await link.save(on: req.db)
         return link.toDTO()

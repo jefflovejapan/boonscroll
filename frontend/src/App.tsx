@@ -15,12 +15,12 @@ function App() {
   const submitLinkClick = async () => {
     if (inputValue) {
       try {
-        const response = await fetch('localhost', {
+        const response = await fetch('http://127.0.0.1:8080/links', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ link: inputValue }),
+          body: JSON.stringify({ url: inputValue, title: "cool video" }),
         });
         const result = await response.json();
         console.log('Network call result:', result);
@@ -33,7 +33,7 @@ function App() {
       alert('Input is empty!');
     }
   };
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
@@ -48,7 +48,7 @@ function App() {
       <Layout>
         <Header>Oh, sick!</Header>
         <Content>
-          <Input size="large" placeholder="Enter Link" value={inputValue} />
+          <Input size="large" placeholder="Enter Link" value={inputValue} onChange={handleInputChange} />
           <Button type="primary" onClick={submitLinkClick}>Submit</Button>
         </Content>
       </Layout>

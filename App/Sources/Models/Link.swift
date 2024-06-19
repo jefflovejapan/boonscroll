@@ -26,9 +26,12 @@ final class Link: Model, @unchecked Sendable {
 
   init() {}
 
-  init(id: UUID? = nil, title: String) {
+  init(id: UUID? = nil, url: URL, title: String, thumbnailURL: URL?, notes: String?) {
     self.id = id
+    self.url = url
     self.title = title
+    self.thumbnailURL = thumbnailURL
+    self.notes = notes
   }
 
   func toDTO() -> LinkDTO {
