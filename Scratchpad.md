@@ -21,7 +21,7 @@
 
 ## Goals
 
-- reload after adding a link successfully
+- reload after adding a link successfully ✅
+- write a way to remove links ✅
 - add a "createdAt" field to the link so we have some more certainty
 - write a test to make sure URL validation is happening
-- write a way to remove links
