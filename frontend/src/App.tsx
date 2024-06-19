@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Button, Layout, Input } from 'antd';
+import { Button, Layout, Input, List, Typography } from 'antd';
 import type { MenuProps } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -38,8 +38,10 @@ function App() {
   };
 
   type MenuItem = Required<MenuProps>['items'][number];
-  const items: MenuItem[] = [
-
+  const data: String[] = [
+    "dog",
+    "cat",
+    "bird"
   ];
 
 
@@ -50,6 +52,18 @@ function App() {
         <Content>
           <Input size="large" placeholder="Enter Link" value={inputValue} onChange={handleInputChange} />
           <Button type="primary" onClick={submitLinkClick}>Submit</Button>
+          <List
+            header={<div>Header</div>}
+            footer={<div>Footer</div>}
+            bordered
+            dataSource={data}
+            renderItem={(item) => (
+              <List.Item>
+                {item}
+              </List.Item>
+            )}
+          />
+
         </Content>
       </Layout>
       <header className="App-header">

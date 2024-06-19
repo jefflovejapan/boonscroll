@@ -26,7 +26,7 @@ final class Link: Model, @unchecked Sendable {
 
   init() {}
 
-  init(id: UUID? = nil, url: URL, title: String, thumbnailURL: URL?, notes: String?) {
+  init(id: UUID? = nil, url: URL, title: String, thumbnailURL: URL? = nil, notes: String? = nil) {
     self.id = id
     self.url = url
     self.title = title

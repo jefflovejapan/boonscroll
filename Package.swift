@@ -30,10 +30,10 @@ let package = Package(
         .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
       ],
       path: "App/Sources/",
-    //   resources: [
-    //     .copy("./Public/"),
-    //     .copy("./Resources/"),
-    //   ],
+      //   resources: [
+      //     .copy("./Public/"),
+      //     .copy("./Resources/"),
+      //   ],
       swiftSettings: swiftSettings
     ),
     .testTarget(
