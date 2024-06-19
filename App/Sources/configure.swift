@@ -38,7 +38,7 @@ public func configure(_ app: Application) async throws {
   Put the JS and HTML etc. on a CDN and have the Swift code on a completely separate server
   */
 
-  app.migrations.add(CreateTodo())
+  app.migrations.add(CreateTodo(), CreateLink())
   // register routes
   let fileMiddleware = FileMiddleware(
     publicDirectory: app.directory.publicDirectory
