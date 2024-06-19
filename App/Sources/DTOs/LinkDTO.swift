@@ -3,6 +3,7 @@ import Vapor
 
 struct LinkDTO: Content {
     var id: UUID?
+    var createdAt: Date
     var url: URL
     var title: String
     var thumbnailURL: URL?

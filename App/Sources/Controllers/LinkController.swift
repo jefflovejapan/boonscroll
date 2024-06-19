@@ -7,7 +7,7 @@ struct LinkInput: Content, Validatable {
   var thumbnailURL: URL?
 
   func toModel() -> Link {
-    return Link.init(id: nil, url: self.url, title: self.title, thumbnailURL: nil, notes: nil)
+    return Link.init(id: nil, createdAt: Date(), url: self.url, title: self.title, thumbnailURL: nil, notes: nil)
   }
 
   static func validations(_ validations: inout Validations) {

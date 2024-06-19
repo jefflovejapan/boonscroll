@@ -58,10 +58,13 @@ function App() {
     }
     try {
       await submitLink(inputURL, inputTitle);
+      const links = await loadLinks();
+      setLinks(links);
     } catch (error) {
       const fetchError = error as FetchError;
       setLoadError(fetchError.message);
       console.error('Error submitting link:', error);
+      return Promise.reject();
     }
   }
 
@@ -107,9 +110,23 @@ function App() {
             bordered
             dataSource={links}
             renderItem={(link) => (
-              <List.Item key={link.id} actions={[<Button danger={true} type="primary" onClick={(_: React.MouseEvent<HTMLElement, MouseEvent>) => deleteLinkClicked(link.id)}>Delete</Button>]}>
-                {link.title}: <a href={link.url}>link</a>
+              <List.Item
+                key={link.id}
+                actions={[
+                  <Button
+                    danger={true}
+                    type="primary"
+                    onClick={(_: React.MouseEvent<HTMLElement, MouseEvent>) => deleteLinkClicked(link.id)}
+                  >
+                    Delete
+                  </Button>
+                ]}
+              >
+                <>
+                  {link.title}, created at: {link.createdAt ? new Date(link.createdAt).toLocaleDateString() : 'N/A'}: <a href={link.url}>link</a>
+                </>
               </List.Item>
+
             )}
           />
         </Content>

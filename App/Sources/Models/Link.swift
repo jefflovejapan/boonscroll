@@ -2,6 +2,7 @@ import Fluent
 
 import struct Foundation.URL
 import struct Foundation.UUID
+import struct Foundation.Date
 
 /// Property wrappers interact poorly with `Sendable` checking, causing a warning for the `@ID` property
 /// It is recommended you write your model with sendability checking on and then suppress the warning
@@ -11,6 +12,9 @@ final class Link: Model, @unchecked Sendable {
 
   @ID(key: .id)
   var id: UUID?
+
+  @Field(key: "created_at")
+  var createdAt: Date
 
   @Field(key: "url")
   var url: URL
@@ -26,8 +30,9 @@ final class Link: Model, @unchecked Sendable {
 
   init() {}
 
-  init(id: UUID? = nil, url: URL, title: String, thumbnailURL: URL? = nil, notes: String? = nil) {
+  init(id: UUID? = nil, createdAt: Date, url: URL, title: String, thumbnailURL: URL? = nil, notes: String? = nil) {
     self.id = id
+    self.createdAt = createdAt
     self.url = url
     self.title = title
     self.thumbnailURL = thumbnailURL
@@ -36,7 +41,7 @@ final class Link: Model, @unchecked Sendable {
 
   func toDTO() -> LinkDTO {
     .init(
-      id: self.id, url: self.url, title: self.title, thumbnailURL: self.thumbnailURL,
+      id: self.id, createdAt: self.createdAt, url: self.url, title: self.title, thumbnailURL: self.thumbnailURL,
       notes: self.notes)
   }
 }

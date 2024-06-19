@@ -1,5 +1,6 @@
 export type Link = {
   id: string,
+  createdAt: Date,
   url: string,
   title: string
 }
