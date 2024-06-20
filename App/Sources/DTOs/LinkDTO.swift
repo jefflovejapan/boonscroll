@@ -1,7 +1,7 @@
 import Fluent
 import Vapor
 
-struct LinkDTO: Content {
+struct LinkDTO: Content, Equatable {
     var id: UUID?
     var createdAt: Date
     var url: URL

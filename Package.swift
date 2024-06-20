@@ -17,6 +17,7 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     // SQLite for faster tests.
     .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0"),
+    .package(url: "git@github.com:apple/swift-testing.git", from: "0.9.0"),
   ],
   targets: [
     .executableTarget(
