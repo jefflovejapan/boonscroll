@@ -2,7 +2,7 @@
 import XCTVapor
 import Fluent
 
-final class AppTests: XCTestCase {
+final class TodoTests: XCTestCase {
     var app: Application!
     
     override func setUp() async throws {

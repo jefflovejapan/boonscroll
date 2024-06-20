@@ -32,7 +32,28 @@ public func configure(_ app: Application) async throws {
     throw ConfigurationError.unknownDatabaseType(databaseType)
   }
 
-  app.migrations.add(CreateTodo())
+  /*
+  file middleware -> index.html call some endpoint
+
+  Put the JS and HTML etc. on a CDN and have the Swift code on a completely separate server
+  */
+
+  app.migrations.add(CreateTodo(), CreateLink())
+  let fileMiddleware = FileMiddleware(
+    publicDirectory: app.directory.publicDirectory
+  )
+  let corsConfiguration = CORSMiddleware.Configuration(
+    allowedOrigin: .all,
+    allowedMethods: [.GET, .POST, .PUT, .OPTIONS, .DELETE, .PATCH],
+    allowedHeaders: [
+      .accept, .authorization, .contentType, .origin, .xRequestedWith, .userAgent,
+      .accessControlAllowOrigin,
+    ]
+  )
+  let cors = CORSMiddleware(configuration: corsConfiguration)
+  // cors middleware should come before default error middleware using `at: .beginning`
+  app.middleware.use(cors, at: .beginning)
+  app.middleware.use(fileMiddleware)
   // register routes
   try routes(app)
 }
