@@ -18,7 +18,7 @@ final class LinkTests: XCTestCase {
     self.app = nil
   }
 
-  func testCreatingLinkAddsToDB() async throws {
+  func testCreatingLinkWithGoodURLAddsToDB() async throws {
     let linkInput = LinkInput(
       url: try XCTUnwrap(URL(string: "https://sears.com")),
       title: "Sears"
@@ -36,7 +36,7 @@ final class LinkTests: XCTestCase {
       })
   }
 
-  func testCreatingLinkWithBadURLThrows() async throws {
+  func testCreatingLinkWithBadURLReturnsBadRequest() async throws {
     let linkInput = LinkInput(
       url: try XCTUnwrap(URL(string: "whatever")),
       title: "Bad"
